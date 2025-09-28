@@ -4,7 +4,7 @@ import os
 import shutil
 import sys
 from file_operations import copy_contents
-from generate_operations import generate_page
+from generate_operations import generate_page, generate_pages_recursive
 
 
 dir_path_static = "./static"
@@ -24,7 +24,8 @@ def main():
         shutil.rmtree(dir_path_public)
 
     copy_contents(dir_path_static, dir_path_public)
-    generate_page(dir_path_content + "/index.md", template_path, dir_path_public + "/index.html")
+    print("Generating page...")
+    generate_pages_recursive(dir_path_content, template_path, dir_path_public)
     
 if __name__ == "__main__":
     main()
