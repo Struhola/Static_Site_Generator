@@ -4,6 +4,7 @@ import os
 import shutil
 import sys
 from file_operations import copy_contents
+from generate_operations import generate_page
 
 
 dir_path_static = "./static"
@@ -15,10 +16,6 @@ default_basepath = "/"
 
 
 def main():
-    basepath = default_basepath
-    if len(sys.argv) > 1:
-        basepath = sys.argv[1]
-
     if not os.path.exists(dir_path_static):
         raise Exception(f"Source {dir_path_static} doesn't exists")
 
@@ -27,6 +24,7 @@ def main():
         shutil.rmtree(dir_path_public)
 
     copy_contents(dir_path_static, dir_path_public)
-
+    generate_page(dir_path_content + "/index.md", template_path, dir_path_public + "/index.html")
+    
 if __name__ == "__main__":
     main()
